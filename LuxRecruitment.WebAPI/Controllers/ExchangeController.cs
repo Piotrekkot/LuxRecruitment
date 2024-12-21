@@ -1,4 +1,6 @@
 ﻿using LuxRecruitment.Application.Interfaces;
+using LuxRecruitment.Core.Enums;
+using LuxRecruitment.Core.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LuxRecruitment.WebAPI.Controllers
@@ -17,14 +19,22 @@ namespace LuxRecruitment.WebAPI.Controllers
         /// <summary>
         /// Pobieranie listy kursów walut z API NBP.
         /// </summary>
-        /// <returns>Lista kursów walut</returns>
-        [HttpGet]
-        public async Task<IActionResult> GetExchangeRates()
+        /// <param name="table">Typ tabeli kursów walut</param>
+        /// <param name="topCount">liczba określająca maksymalny rozmiar zwracanej serii danych</param>
+        /// <returns>Lista kursów walut z NBP.</returns>
+        /// <response code="200">Sukces - Zwraca listę kursów walut.</response>
+        /// <response code="404">Nie znaleziono danych dla podanych parametrów.</response>
+        /// <response code="500">Błąd serwera podczas pobierania danych.</response>
+        [HttpGet("{table}/{topCount}")]
+        [ProducesResponseType(typeof(IEnumerable<ExchangeRateDTO>), 200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetExchangeRates(ExchangeRateTable table, uint topCount)
         {
             _logger.LogWarning("Start GetExchangeRates");
             try
             {
-                var rates = await _exchangeService.GetExchangeRatesAsync();
+                var rates = await _exchangeService.GetExchangeRatesAsync(table, topCount);
 
                 if (rates == null || !rates.Any())
                 {

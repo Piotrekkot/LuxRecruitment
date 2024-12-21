@@ -1,4 +1,5 @@
 ﻿using LuxRecruitment.Application.Interfaces;
+using LuxRecruitment.Core.Enums;
 using LuxRecruitment.Core.Interfaces;
 using LuxRecruitment.Core.Model;
 
@@ -13,9 +14,9 @@ namespace LuxRecruitment.Application.Service
             _nbpApiService = nbpApiService;
         }
 
-        public async Task<IEnumerable<ExchangeRateDTO>> GetExchangeRatesAsync()
+        public async Task<IEnumerable<ExchangeRateDTO>> GetExchangeRatesAsync(ExchangeRateTable table, uint topCount)
         {
-            return await _nbpApiService.GetExchangeRatesAsync();
+            return await _nbpApiService.GetExchangeRatesAsync(table,topCount);
         }
     }
 }
