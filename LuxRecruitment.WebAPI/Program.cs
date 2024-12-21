@@ -1,5 +1,13 @@
+using LuxRecruitment.DependencyInjection;
+using LuxRecruitment.Logging;
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
 
+LoggerConfigurator.ConfigureLogger(builder.Configuration);
+builder.Host.UseSerilog();
+
+builder.Services.AddLuxRecruitmentServices();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -8,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+app.UseSerilogRequestLogging();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
