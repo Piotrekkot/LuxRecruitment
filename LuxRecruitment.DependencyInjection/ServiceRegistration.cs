@@ -2,6 +2,7 @@
 using LuxRecruitment.Application.Service;
 using LuxRecruitment.Core.Interfaces;
 using LuxRecruitment.Infrastructure.Service;
+using LuxRecruitment.Web.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
@@ -29,7 +30,10 @@ namespace LuxRecruitment.DependencyInjection
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
             }); ;
 
-            
+            //jwt
+            services.AddScoped<JwtTokenGenerator>();
+
+
         }
     }
 }
