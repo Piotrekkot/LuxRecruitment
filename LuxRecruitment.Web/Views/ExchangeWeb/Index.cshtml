@@ -1,0 +1,28 @@
+﻿@model List<LuxRecruitment.Web.Models.ExchangeRateViewModel>
+
+@{
+    ViewData["Title"] = "Kursy walut";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Kursy walut</h2>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Nazwa waluty</th>
+                <th>Kod waluty</th>
+                <th>Kurs wymiany</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rate in Model)
+            {
+                <tr>
+                    <td>@rate.CurrencyName</td>
+                    <td>@rate.CurrencyCode</td>
+                    <td>@rate.ExchangeRateValue</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

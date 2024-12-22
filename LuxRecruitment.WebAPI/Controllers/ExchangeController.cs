@@ -1,10 +1,12 @@
 ﻿using LuxRecruitment.Application.Interfaces;
 using LuxRecruitment.Core.Enums;
 using LuxRecruitment.Core.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LuxRecruitment.WebAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ExchangeController : ControllerBase

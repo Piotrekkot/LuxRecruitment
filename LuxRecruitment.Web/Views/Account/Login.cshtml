@@ -1,0 +1,98 @@
+﻿@model LuxRecruitment.Web.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Logowanie";
+    var message = (string?)TempData["LoginMessage"];
+}
+
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+    <div class="card shadow-lg p-4" style="width: 400px;">
+        <h3 class="text-center mb-4">Zaloguj się</h3>
+        @if (!string.IsNullOrEmpty(message))
+        {
+            <div class="alert alert-warning" role="alert">
+                @message
+            </div>
+        }
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            </div>
+        }
+        <form method="post">
+            <div class="form-group mb-3">
+                <label asp-for="Username" class="form-label">Nazwa użytkownika</label>
+                <input asp-for="Username" class="form-control" placeholder="Wprowadź nazwę użytkownika" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Password" class="form-label">Hasło</label>
+                <input asp-for="Password" class="form-control" type="password" placeholder="Wprowadź hasło" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Zaloguj się</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Resetowanie błędów
+            document.getElementById("usernameError").textContent = "";
+            document.getElementById("passwordError").textContent = "";
+            document.getElementById("loginError").textContent = "";
+
+            // Prosta walidacja po stronie klienta
+            if (!username) {
+                document.getElementById("usernameError").textContent = "Proszę podać nazwę użytkownika.";
+                return;
+            }
+
+            if (!password) {
+                document.getElementById("passwordError").textContent = "Proszę podać hasło.";
+                return;
+            }
+
+            // Wysłanie żądania do kontrolera
+            try {
+                const response = await fetch('/Account/Login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const token = data.token;
+
+                    // Zapisanie tokenu w localStorage
+                    localStorage.setItem('jwtToken', token);
+
+                    // Przekierowanie na stronę główną
+                    window.location.href = '/Home/Index';
+                } else {
+                    const error = await response.json();
+                    document.getElementById("loginError").textContent = error.message || "Nieprawidłowe dane logowania.";
+                }
+            } catch (error) {
+                console.error("Błąd podczas logowania:", error);
+                document.getElementById("loginError").textContent = "Wystąpił problem z serwerem.";
+            }
+        });
+    </script>
+}
