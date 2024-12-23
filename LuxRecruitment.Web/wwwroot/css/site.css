@@ -47,11 +47,9 @@ a {
     font-size: 1.4rem;
     font-weight: bold;
     color: #00ac35 !important;
-
 }
 
     .navbar-brand:hover {
         color: #00ac35;
-        text-decoration: underline;
         transition: color 0.3s ease, text-decoration 0.3s ease;
     }
