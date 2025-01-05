@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuxRecruitment.Web", "LuxRe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuxRecruitment.DependencyInjection", "LuxRecruitment.DependencyInjection\LuxRecruitment.DependencyInjection.csproj", "{81BF9C92-C7D8-4FD8-8AD3-34E6F13E7B27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuxRecruitment.Logging", "LuxRecruitment.Logging\LuxRecruitment.Logging.csproj", "{C36BD058-5D86-438C-893F-F624B6702D89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuxRecruitment.Logging", "LuxRecruitment.Logging\LuxRecruitment.Logging.csproj", "{C36BD058-5D86-438C-893F-F624B6702D89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

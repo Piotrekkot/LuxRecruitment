@@ -7,6 +7,9 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddRazorPages()
+    .AddRazorRuntimeCompilation();
+
 // Serilog
 LoggerConfigurator.ConfigureLogger(builder.Configuration);
 builder.Host.UseSerilog();
