@@ -1,8 +1,32 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var isLoggedIn = Context.Request.Cookies.ContainsKey("AuthToken");
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+@if (isLoggedIn)
+{
+    <div class="animated-container-left">
+        <div class="animated-text-left">
+            <p>Użytkownik zalogowany, można przejść na stronę kursów walut</p>
+        </div>
+    </div>
+    <div class="animated-container-right">
+        <div class="animated-text-right">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex</p>
+        </div>
+    </div>
+}
+else
+{
+    <div class="animated-container-left">
+        <div class="animated-text-left">
+            <p>Zaloguj się, aby otrzymać dostęp do kursów walut<br /> Login:admin Hasło:admin123</p>
+        </div>
+    </div>
+    <div class="animated-container-right">
+        <div class="animated-text-right">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex</p>
+        </div>
+    </div>
+}

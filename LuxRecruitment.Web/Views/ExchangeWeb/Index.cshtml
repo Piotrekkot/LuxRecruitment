@@ -3,11 +3,14 @@
 @{
     ViewData["Title"] = "Kursy walut";
 }
-
-<div class="container mt-5">
-    <h2 class="text-center">Kursy walut</h2>
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
+@section Styles {
+    <link rel="stylesheet" href="~/css/ExchangeTable.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+}
+<div class="container">
+<div class="table-responsive my-4">
+    <table id="exchangeTable" class="display exchange-table">
+        <thead>
             <tr>
                 <th>Nazwa waluty</th>
                 <th>Kod waluty</th>
@@ -26,3 +29,20 @@
         </tbody>
     </table>
 </div>
+</div>
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#exchangeTable').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/pl.json"
+                }
+            });
+        });
+    </script>
+}

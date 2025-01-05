@@ -5,7 +5,7 @@
     var message = (string?)TempData["LoginMessage"];
 }
 
-<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+<div class="d-flex justify-content-center align-items-center mt-5 mb-5">
     <div class="card shadow-lg p-4" style="width: 400px;">
         <h3 class="text-center mb-4">Zaloguj się</h3>
         @if (!string.IsNullOrEmpty(message))
@@ -83,7 +83,6 @@
                     // Zapisanie tokenu w localStorage
                     localStorage.setItem('jwtToken', token);
 
-                    // Przekierowanie na stronę główną
                     window.location.href = '/Home/Index';
                 } else {
                     const error = await response.json();
