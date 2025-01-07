@@ -50,12 +50,12 @@
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
-            // Resetowanie błędów
+            //Resetowanie błędów
             document.getElementById("usernameError").textContent = "";
             document.getElementById("passwordError").textContent = "";
             document.getElementById("loginError").textContent = "";
 
-            // Prosta walidacja po stronie klienta
+            //Prosta walidacja po stronie klienta
             if (!username) {
                 document.getElementById("usernameError").textContent = "Proszę podać nazwę użytkownika.";
                 return;
@@ -66,7 +66,7 @@
                 return;
             }
 
-            // Wysłanie żądania do kontrolera
+            //Wysłanie żądania do kontrolera
             try {
                 const response = await fetch('/Account/Login', {
                     method: 'POST',
@@ -80,7 +80,7 @@
                     const data = await response.json();
                     const token = data.token;
 
-                    // Zapisanie tokenu w localStorage
+                    //Zapisanie tokenu w localStorage
                     localStorage.setItem('jwtToken', token);
 
                     window.location.href = '/Home/Index';
